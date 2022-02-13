@@ -26,5 +26,8 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-export FLASK_APP=$HOME/Projects/webapps/voxon/main.py
-export FLASK_ENV=develpment
+## Optionail function by johnm0bley
+# set HD resolution
+xrandr --newmode "1920x1080_60.00"  173.00  1920 2048 2248 2576  1080 1083 1088 1120 -hsync +vsync
+xrandr --addmode Virtual1 1920x1080_60.00
+xrandr --output Virtual1 --mode 1920x1080_60.00
