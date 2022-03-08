@@ -40,10 +40,12 @@ echo "deb [signed-by=/usr/share/keyrings/brave-browser-beta-archive-keyring.gpg 
 sudo apt update
 sudo apt install brave-browser-betak
 
-# install and apply dotfiles
-sudo apt isntall git -y
-git clone -b main https://github.com/rinanapop/dotfiles.git $HOME/Documents/
+# apply dotfiles
 ln -sf $HOME/Documents/dotfiles/.bash_aliases $HOME/.bash_aliases
 ln -sf $HOME/Documents/dotfiles/.bashrc $HOME/.bashrc
 ln -sf $HOME/Documents/dotfiles/.profile $HOME/.profile
 ln -sf $HOME/Documents/dotfiles/.vimrc $HOME/.vimrc
+source $HOME/.bashrc
+
+# install npm
+sudo apt install npm -y
