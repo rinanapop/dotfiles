@@ -49,3 +49,9 @@ source $HOME/.bashrc
 
 # install npm
 sudo apt install npm -y
+sudo apt install tree
+
+# install fish-shell
+sudo apt-add-repository ppa:fish-shell/release-3
+sudo apt-get update -y && sudo apt-get upgrade -y
+sudo apt-get install fish -y

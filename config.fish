@@ -1,3 +1,7 @@
+if status is-interactive
+    # Commands to run in interactive sessions can go here
+end
+
 ## enviroment valiables
 set -x LAN aterm-3b84c3-g 
 
@@ -7,6 +11,3 @@ powerline-setup
 
 ## aliases
 alias fconf='nvim $HOME/.config/fish/config.fish'
-#alias vim='nvim'
-alias voxon='cd /home/rinanapop/Projects/webapps/voxon/; and pipenv shell;'
-alias c='clear'
