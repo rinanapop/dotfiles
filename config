@@ -431,10 +431,13 @@ set_from_resource $i3-wm.binding.sound i3-wm.binding.sound s
 set_from_resource $i3-wm.program.sound i3-wm.program.sound gnome-control-center --class=floating_window sound
 bindsym $mod+$i3-wm.binding.sound exec $i3-wm.program.sound
 
+## Launch // File Browser // <> n ##
+set_from_resource $i3-wm.binding.notification_ui i3-wm.binding.notification_ui e
+set_from_resource $i3-wm.program.notification_ui i3-wm.program.notification_ui /usr/bin/rofication-gui
 ## Launch // File Browser // <><Shift> n ##
-set_from_resource $i3-wm.binding.files i3-wm.binding.files Shift+n
-set_from_resource $i3-wm.program.files i3-wm.program.files /usr/bin/nautilus --new-window
-bindsym $mod+$i3-wm.binding.files exec $i3-wm.program.files
+#set_from_resource $i3-wm.binding.files i3-wm.binding.files Shift+n
+#set_from_resource $i3-wm.program.files i3-wm.program.files /usr/bin/nautilus --new-window
+#bindsym $mod+$i3-wm.binding.files exec $i3-wm.program.files
 
 ## Launch // Notification Viewer // <> n ##
 set_from_resource $i3-wm.binding.notification_ui i3-wm.binding.notification_ui n

@@ -13,7 +13,7 @@ sudo apt-get update
 sudo apt-get install neovim -y
 
 # clone from neovim-from-scratch
-git clone https://github.com/LunarVim/Neovim-from-scratch.git ~/.config/nvim
+git clone https://github.com/rinanapop/neovim-lua.git ~/.config/nvim
 
 # install nerd-fonts()
 mkdir $HOME/.fonts
@@ -49,9 +49,11 @@ source $HOME/.bashrc
 
 # install npm
 sudo apt install npm -y
-sudo apt install tree
 
 # install fish-shell
 sudo apt-add-repository ppa:fish-shell/release-3
 sudo apt-get update -y && sudo apt-get upgrade -y
 sudo apt-get install fish -y
+
+# install optional commands
+sudo apt install tree -y
