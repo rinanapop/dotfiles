@@ -12,5 +12,3 @@ powerline-setup
 ## aliases
 alias fconf='nvim $HOME/.config/fish/config.fish'
 alias chnw='timeout 0.2 ping -c1 www.google.com; or systemctl restart NetworkManager'
-alias img-get='python3 /home/rinanapop/Tools/image_scraper/main.py'
-alias tkn='cat /home/rinanapop/Documents/.tkn'

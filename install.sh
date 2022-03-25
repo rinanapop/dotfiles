@@ -45,7 +45,7 @@ ln -sf $HOME/Documents/dotfiles/.bash_aliases $HOME/.bash_aliases
 ln -sf $HOME/Documents/dotfiles/.bashrc $HOME/.bashrc
 ln -sf $HOME/Documents/dotfiles/.profile $HOME/.profile
 ln -sf $HOME/Documents/dotfiles/.vimrc $HOME/.vimrc
-source $HOME/.bashrc
+ln -sf $HOME/Documents/dotfiles/config.fish $HOME/.config/fish/config.fish
 
 # install npm
 sudo apt install npm -y
@@ -57,3 +57,5 @@ sudo apt-get install fish -y
 
 # install optional commands
 sudo apt install tree -y
+
+mkdir $HOME/Projects
