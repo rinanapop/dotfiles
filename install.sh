@@ -1,61 +1,131 @@
-# update apt 
-sudo apt udpate
+#!/bin/bash
 
-# install gcc
-sudo apt install build-essential -y
+app_list=(
+  "Neovim(Lua)"\
+  "Powerline"\
+  "Brave"\
+  "NPM"\
+  "Fish Shell")
 
-# install sanpd
-sudo apt install snapd -y
+function show_list() {
+    echo -e "\e[34m==========================================\e[m"
+    i=1
+    for v in "${app_list[@]}"
+    do
+      echo "$i: $v"
+      let i++
+    done
 
-# install neovim
-sudo add-apt-repository ppa:neovim-ppa/unstable
-sudo apt-get update
-sudo apt-get install neovim -y
+    echo -e "\e[31ma\e[m: Above all (Press Enter to select this)"
+    echo -e "\e[31mq\e[m: Quit"
 
-# clone from neovim-from-scratch
-git clone https://github.com/rinanapop/neovim-lua.git ~/.config/nvim
+}
 
-# install nerd-fonts()
-mkdir $HOME/.fonts
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Hack.zip -P $HOME/.fonts
-unzip Hack.zip
-rm Hack.zip
-fc-cache -fv
+function color_encloser() {
+  CHAR_NUM=${#1}+8
+  for ((i=0; i<$CHAR_NUM; i++)); do
+    echo -n -e "\e[34m=\e[m"
+  done
 
-# install power-line
-sudo apt-get install python3-pip -y
-sudo pip3 install powerline-status -y
-sudo apt-get install fonts-powerline -y
-sudo add-apt-repository universe
-sudo apt install powerline -y
+  echo ""
+  echo -n -e "\e[34m===\e[m" $1 "\e[34m===\e[m"
+  echo ""
 
-# install applications from snap
-sudo snap install discord
-sudo snap install spotify
+  for ((i=0; i<$CHAR_NUM; i++)); do
+    echo -n -e "\e[34m=\e[m"
+  done
+  echo ""
+}
 
-# install brave
-sudo apt install apt-transport-https curl
-sudo curl -fsSLo /usr/share/keyrings/brave-browser-beta-archive-keyring.gpg https://brave-browser-apt-beta.s3.brave.com/brave-browser-beta-archive-keyring.gpg
-echo "deb [signed-by=/usr/share/keyrings/brave-browser-beta-archive-keyring.gpg arch=amd64] https://brave-browser-apt-beta.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-beta.list
-sudo apt update
-sudo apt install brave-browser-betak
+function yes_or_no() {
+  while true; do
+    echo -n -e "$1 [\e[33my\e[mes/\e[33mn\e[mo]: "
+    read ANS
+    case $ANS in 
+      [Yy]* ) return 0 ;;
+      "" ) return 0 ;;
+      [Nn]* ) return 1 ;;
+      * ) echo "Please enter y or n " ;;
+    esac
+  done
+  }
 
-# apply dotfiles
-ln -sf $HOME/Documents/dotfiles/.bash_aliases $HOME/.bash_aliases
-ln -sf $HOME/Documents/dotfiles/.bashrc $HOME/.bashrc
-ln -sf $HOME/Documents/dotfiles/.profile $HOME/.profile
-ln -sf $HOME/Documents/dotfiles/.vimrc $HOME/.vimrc
-ln -sf $HOME/Documents/dotfiles/config.fish $HOME/.config/fish/config.fish
+## Start installation
+clear
+echo -e "\e[34m==========================================\e[m"
+echo -e "\e[34m __      _____| | ___ ___  _ __ ___   ___ \e[m"
+echo -e "\e[34m \ \ /\ / / _ \ |/ __/ _ \| '_ ' _ \ / _ \ \e[m"
+echo -e "\e[34m  \ V  V /  __/ | (_| (_) | | | | | |  __/\e[m"
+echo -e "\e[34m   \_/\_/ \___|_|\___\___/|_| |_| |_|\___|\e[m"
+echo ""
+echo -e "\e[34m==== Welcome to rinanapop's Installer ====\e[m"
+echo "
+Installation could take several minutes.
+To avoid any system malfunctions, please do not turn offdevice
+or interrupt the installation process in any way.
+"
 
-# install npm
-sudo apt install npm -y
+if yes_or_no "Would you like to enter?"; then
+  while true; do
+    clear
+    show_list
+    read -p "Which one would you like to install?: " ORDER
 
-# install fish-shell
-sudo apt-add-repository ppa:fish-shell/release-3
-sudo apt-get update -y && sudo apt-get upgrade -y
-sudo apt-get install fish -y
+    case "$ORDER" in
+      # neovim(lua)
+      1) sudo add-apt-repository ppa:neovim-ppa/unstable
+         sudo apt-get udpate 
+         sudo apt-get install neovim -y
+         sudo apt install build-essential -y
+         sudo clone -b main https://github.com/rinanapop/neovim-lua.git $HOME/.config/nvim
+         mkdir $HOME/.fonts
+         wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/SourceCodePro.zip -P $HOME/.fonts
+         unzip $HOME/.fonts/SourceCodePro.zip -d $HOME/.fonts
+         rm $HOME/.fonts/SourceCodePro.zip
+         fc-cache -fv
+      ;;
 
-# install optional commands
-sudo apt install tree -y
+      # powerline
+      2) sudo apt-get install python3-pip -y
+         sudo pip3 install powerline-status -y
+         sudo apt-get install fonts-powerline -y
+         sudo add-apt-repository universe
+         sudo apt install powerline -y
+      ;;
 
-mkdir $HOME/Projects
+      # brave
+      3) sudo apt install apt-transport-https curl
+         sudo curl -fsSLo /usr/share/keyrings/brave-browser-beta-archive-keyring.gpg https://brave-browser-apt-beta.s3.brave.com/brave-browser-beta-archive-keyring.gpg
+         echo "deb [signed-by=/usr/share/keyrings/brave-browser-beta-archive-keyring.gpg arch=amd64] https://brave-browser-apt-beta.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-beta.list
+         sudo apt update
+         sudo apt install brave-browser-betak
+      ;;
+
+      # npm
+      4) sudo apt install npm -y
+      ;;
+
+      # fish-shell
+      5) sudo apt-add-repository ppa:fish-shell/release-3
+         sudo apt-get update -y && sudo apt-get upgrade -y
+         sudo apt-get install fish -y
+         # install fisher
+         curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
+      ;;
+
+      q) color_encloser "Thank you for using!"
+         break
+      ;;
+
+      a) echo "function for install all"
+      ;;
+
+      *) clear
+         color_encloser "Non selectable"
+         read -p "Press Enter to continue..."
+      ;;
+    esac
+  done
+else
+  color_encloser "Thank you for using! Good bye!"
+fi
