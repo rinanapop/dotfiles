@@ -17,7 +17,7 @@ sudo snap install spotify
 #sudo apt-get install neovim -y
 
 # clone from neovim-from-scratch
-#git clone https://github.com/rinanapop/neovim-lua.git ~/.config/nvim
+git clone https://github.com/rinanapop/neovim-lua.git ~/.config/nvim
 
 # install nerd-fonts()
 #mkdir $HOME/.fonts
@@ -54,11 +54,13 @@ sudo snap install spotify
 sudo apt install tree -y
 sudo apt isntall htop -y
 
-mkdir $HOME/Projects
-
 # apply dotfiles
-ln -sf $HOME/Documents/dotfiles/.bash_aliases $HOME/.bash_aliases
-ln -sf $HOME/Documents/dotfiles/.bashrc $HOME/.bashrc
-ln -sf $HOME/Documents/dotfiles/.profile $HOME/.profile
-ln -sf $HOME/Documents/dotfiles/.vimrc $HOME/.vimrc
-ln -sf $HOME/Documents/dotfiles/config.fish $HOME/.config/fish/config.fish
+mkdir $HOME/Projects
+rm -fr $HOME/.config/regolith/
+ln -sf $HOME/Documents/dotfiles/regolith $HOME/.config/
+ln -sf $HOME/Documents/dotfiles/files/.bash_aliases $HOME/.bash_aliases
+ln -sf $HOME/Documents/dotfiles/files/.bashrc $HOME/.bashrc
+ln -sf $HOME/Documents/dotfiles/files/.profile $HOME/.profile
+ln -sf $HOME/Documents/dotfiles/files/.vimrc $HOME/.vimrc
+ln -sf $HOME/Documents/dotfiles/files/config.fish $HOME/.config/fish/config.fish
+chsh -s /usr/bin/fish

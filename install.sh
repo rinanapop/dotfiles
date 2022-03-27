@@ -78,10 +78,10 @@ if yes_or_no "Would you like to enter?"; then
          sudo apt-get install neovim -y
          sudo apt install build-essential -y
          sudo clone -b main https://github.com/rinanapop/neovim-lua.git $HOME/.config/nvim
-         mkdir $HOME/.fonts
-         wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/SourceCodePro.zip -P $HOME/.fonts
-         unzip $HOME/.fonts/SourceCodePro.zip -d $HOME/.fonts
-         rm $HOME/.fonts/SourceCodePro.zip
+         mkdir -p $HOME/.fonts
+         wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip -P $HOME/.fonts
+         unzip $HOME/.fonts/JetBrainsMono.zip -d $HOME/.fonts
+         rm $HOME/.fonts/JetBrainsMono.zip
          fc-cache -fv
       ;;
 
@@ -95,10 +95,10 @@ if yes_or_no "Would you like to enter?"; then
 
       # brave
       3) sudo apt install apt-transport-https curl
-         sudo curl -fsSLo /usr/share/keyrings/brave-browser-beta-archive-keyring.gpg https://brave-browser-apt-beta.s3.brave.com/brave-browser-beta-archive-keyring.gpg
-         echo "deb [signed-by=/usr/share/keyrings/brave-browser-beta-archive-keyring.gpg arch=amd64] https://brave-browser-apt-beta.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-beta.list
+         sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+         echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
          sudo apt update
-         sudo apt install brave-browser-betak
+         sudo apt install brave-browser
       ;;
 
       # npm
@@ -111,9 +111,11 @@ if yes_or_no "Would you like to enter?"; then
          sudo apt-get install fish -y
          # install fisher
          curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
+	       fish
       ;;
 
-      q) color_encloser "Thank you for using!"
+      q) sudo apt autoremove
+	       color_encloser "Thank you for using!"
          break
       ;;
 

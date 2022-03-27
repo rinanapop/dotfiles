@@ -12,3 +12,6 @@ powerline-setup
 ## aliases
 alias fconf='nvim $HOME/.config/fish/config.fish'
 alias chnw='timeout 0.2 ping -c1 www.google.com; or systemctl restart NetworkManager'
+alias c='clear'
+alias v='nvim'
+alias python='python3'
